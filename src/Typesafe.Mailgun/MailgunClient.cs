@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using Typesafe.Mailgun.Events;
 using Typesafe.Mailgun.Mailboxes;
 using Typesafe.Mailgun.Routing;
 using Typesafe.Mailgun.Statistics;
@@ -55,8 +56,13 @@ namespace Typesafe.Mailgun
 			return new DeleteCommand(this, "../routes/" + routeId).Invoke();
 		}
 
+        public IEnumerable<MailgunEventEntry> GetEvents(MailgunEventType eventTypes, DateTime beginTime, DateTime endTime,
+            bool ascending, int limit)
+        {
+            return new MailgunEventQuery(this, eventTypes, beginTime, endTime, ascending, limit).Execute();
+        }
 
-		public IEnumerable<MailgunStatEntry> GetStats(int skip, int take, MailgunEventTypes eventTypes, out int count)
+        public IEnumerable<MailgunStatEntry> GetStats(int skip, int take, MailgunEventTypes eventTypes, out int count)
 		{
 			return new MailgunStatsQuery(this, eventTypes).Execute(skip, take, out count);
 		}

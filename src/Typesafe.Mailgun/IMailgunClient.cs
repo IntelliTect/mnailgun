@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using Typesafe.Mailgun.Events;
 using Typesafe.Mailgun.Mailboxes;
 using Typesafe.Mailgun.Routing;
 using Typesafe.Mailgun.Statistics;
@@ -24,7 +26,11 @@ namespace Typesafe.Mailgun
 
 		CommandResult DeleteRoute(string routeId);
 
-		IEnumerable<MailgunStatEntry> GetStats(int skip, int take, MailgunEventTypes eventTypes, out int count);
+        IEnumerable<MailgunStatEntry> GetStats(int skip, int take, MailgunEventTypes eventTypes, out int count);
+
+	    IEnumerable<MailgunEventEntry> GetEvents(MailgunEventType eventTypes, DateTime beginTime, DateTime endTime,
+	        bool ascending, int limit);
+
 
 		CommandResult CreateMailbox(string name, string password);
 

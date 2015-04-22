@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Typesafe.Mailgun.Events;
 using Typesafe.Mailgun.Http;
 
 namespace Typesafe.Mailgun
@@ -29,6 +31,14 @@ namespace Typesafe.Mailgun
 			return ret;
 		}
 
+        public IEnumerable<T> Execute()
+        {
+            var json = ExecuteRequest().Body;
+
+            MailgunEventQueryResult response = JsonConvert.DeserializeObject<MailgunEventQueryResult>(json.ToString());
+            return response.MailgunEventEntries as IEnumerable<T>;
+        }
+
 		protected IMailgunAccountInfo AccountInfo { get; private set; }
 
 		protected virtual IEnumerable<KeyValuePair<string, string>> AdditionalParameters
@@ -36,9 +46,20 @@ namespace Typesafe.Mailgun
 			get { return Enumerable.Empty<KeyValuePair<string, string>>(); }
 		}
 
+        private MailgunHttpResponse ExecuteRequest()
+        {
+            var url = string.Format("{0}?", path);
+            foreach (var additionalParameter in AdditionalParameters)
+            {
+                url += string.Format("&{0}={1}", additionalParameter.Key, additionalParameter.Value);
+            }
+
+            return new MailgunHttpRequest(AccountInfo, "GET", url).GetResponse();
+        }
+
 		private MailgunHttpResponse ExecuteRequest(int skip, int take)
 		{
-			var url = string.Format("{0}?skip={1}&take={2}", path, skip, take);
+			var url = string.Format("{0}?skip={1}&limit={2}", path, skip, take);
 			foreach (var additionalParameter in AdditionalParameters)
 			{
 				url += string.Format("&{0}={1}", additionalParameter.Key, additionalParameter.Value);

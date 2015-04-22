@@ -9,7 +9,7 @@ namespace Typesafe.Mailgun.Statistics
 	{
 		public DateTime Date { get; set; }
 
-		public MailgunEventTypes EventType { get; set; }
+        public MailgunEventTypes EventType { get; set; }
 
 		public int Count { get; set; }
 	}

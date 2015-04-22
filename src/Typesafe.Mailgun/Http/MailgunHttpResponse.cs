@@ -24,7 +24,7 @@ namespace Typesafe.Mailgun.Http
 
 		private void ReadJson()
 		{
-			if (httpResonse.ContentType != "application/json") return;
+			if (!httpResonse.ContentType.StartsWith("application/json")) return;
 
 			using (var reader = new StreamReader(httpResonse.GetResponseStream()))
 				Body = JToken.ReadFrom(new JsonTextReader(reader));
