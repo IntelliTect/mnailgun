@@ -2,9 +2,9 @@
 {
 	public static class MailgunClientBuilder
 	{
-		public static MailgunClient GetClient(string domain = "samples.mailgun.org")
+        public static MailgunClient GetClient(string domain = "sandboxc47a1a89935d424ea0427462fc328275.mailgun.org")
 		{
-			return new MailgunClient(domain, "key-3ax6xnjp29jd6fds4gc373sgvjxteol0");
+            return new MailgunClient(domain, "key-587808545ca6bbed27d9f8ed584bcba5");
 		}
 	}
 }

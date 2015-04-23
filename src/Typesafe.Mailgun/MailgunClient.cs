@@ -82,5 +82,21 @@ namespace Typesafe.Mailgun
 		{
 			return new MailgunMailboxQuery(this).Execute(skip, take, out count);
 		}
+
+        public CommandResult DeleteBounce(string address)
+        {
+            return new DeleteCommand(this, "bounces/" + address).Invoke();
+        }
+
+        public CommandResult DeleteUnsubscribes(string address)
+        {
+            return new DeleteCommand(this, "unsubscribes/" + address).Invoke();
+        }
+
+        public CommandResult DeleteComplaint(string address)
+        {
+            return new DeleteCommand(this, "complaints/" + address).Invoke();
+        }
+
 	}
 }
