@@ -88,7 +88,7 @@ namespace Typesafe.Mailgun
             return new DeleteCommand(this, "bounces/" + address).Invoke();
         }
 
-        public CommandResult DeleteUnsubscribes(string address)
+        public CommandResult DeleteUnsubscribe(string address)
         {
             return new DeleteCommand(this, "unsubscribes/" + address).Invoke();
         }

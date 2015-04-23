@@ -10,7 +10,7 @@ namespace Typesafe.Mailgun.Tests.Routing
 		[Test]
 		public void delete_unsubscribe_expect_success()
 		{
-            var result = MailgunClientBuilder.GetClient("sandboxc47a1a89935d424ea0427462fc328275.mailgun.org").DeleteUnsubscribes("jaspet@microsoft.com");
+            var result = MailgunClientBuilder.GetClient("sandboxc47a1a89935d424ea0427462fc328275.mailgun.org").DeleteUnsubscribe("jaspet@microsoft.com");
 
 			Assert.IsNotNull(result);
 			Assert.IsNotNullOrEmpty(result.Message);

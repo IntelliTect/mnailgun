@@ -37,5 +37,11 @@ namespace Typesafe.Mailgun
 		CommandResult DeleteMailbox(string name);
 
 		IEnumerable<Mailbox> GetMailboxes(int skip, int take, out int count);
+
+	    CommandResult DeleteBounce(string address);
+
+	    CommandResult DeleteUnsubscribe(string address);
+
+	    CommandResult DeleteComplaint(string address);
 	}
 }
