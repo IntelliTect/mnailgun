@@ -1,8 +1,10 @@
+using System.Net;
+
 namespace Typesafe.Mailgun
 {
 	public class SendMailCommandResult : CommandResult
 	{
-		public SendMailCommandResult(string id, string message) : base(message)
+		public SendMailCommandResult(string id, string message, HttpStatusCode statusCode) : base(message, statusCode)
 		{
 			Id = id;
 		}

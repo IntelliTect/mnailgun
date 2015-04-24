@@ -8,7 +8,7 @@ namespace Typesafe.Mailgun
 
 		public override CommandResult TranslateResponse(MailgunHttpResponse response)
 		{
-			return new CommandResult(response.Message);
+			return new CommandResult(response.Message, response.StatusCode);
 		}
 	}
 }

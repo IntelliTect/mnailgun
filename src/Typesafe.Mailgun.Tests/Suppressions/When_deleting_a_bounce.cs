@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Mail;
 using NUnit.Framework;
 using Typesafe.Mailgun.Routing;
@@ -15,6 +16,7 @@ namespace Typesafe.Mailgun.Tests.Routing
 			Assert.IsNotNull(result);
 			Assert.IsNotNullOrEmpty(result.Message);
             Assert.AreEqual(result.Message, "Bounced address has been removed");
+            Assert.AreEqual(result.StatusCode, HttpStatusCode.OK);
 		}
 	}
 }
