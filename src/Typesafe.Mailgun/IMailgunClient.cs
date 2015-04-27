@@ -28,7 +28,7 @@ namespace Typesafe.Mailgun
 
         IEnumerable<MailgunStatEntry> GetStats(int skip, int take, MailgunEventTypes eventTypes, out int count);
 
-	    IEnumerable<MailgunEventEntry> GetEvents(MailgunEventType eventTypes, DateTime beginTime, DateTime endTime,
+        IEnumerable<MailgunEventEntry> GetEvents(MailgunEventType eventTypes, DateTimeOffset beginTime, DateTimeOffset endTime,
 	        bool ascending, int limit);
 
 

@@ -56,13 +56,13 @@ namespace Typesafe.Mailgun.Events
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(Convert.ToDouble(unixTimeStamp)).ToLocalTime();
+            dtDateTime = dtDateTime.AddSeconds(Convert.ToDouble(unixTimeStamp));
             return dtDateTime;
         }
 
         private static string ToUnixTime( DateTime dateTime )
         {
-            long unixTimestamp = dateTime.Ticks - Epoch.Ticks;
+            double unixTimestamp = dateTime.Ticks - Epoch.Ticks;
             unixTimestamp /= TimeSpan.TicksPerSecond;
             return unixTimestamp.ToString();
         }

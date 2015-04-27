@@ -56,7 +56,7 @@ namespace Typesafe.Mailgun
 			return new DeleteCommand(this, "../routes/" + routeId).Invoke();
 		}
 
-        public IEnumerable<MailgunEventEntry> GetEvents(MailgunEventType eventTypes, DateTime beginTime, DateTime endTime,
+        public IEnumerable<MailgunEventEntry> GetEvents(MailgunEventType eventTypes, DateTimeOffset beginTime, DateTimeOffset endTime,
             bool ascending, int limit)
         {
             return new MailgunEventQuery(this, eventTypes, beginTime, endTime, ascending, limit).Execute();

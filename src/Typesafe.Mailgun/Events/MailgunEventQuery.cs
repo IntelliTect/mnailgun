@@ -11,8 +11,8 @@ namespace Typesafe.Mailgun.Events
 
         public MailgunEventQuery( IMailgunAccountInfo accountInfo,
                 MailgunEventType eventTypes,
-                DateTime beginTime,
-                DateTime endTime,
+                DateTimeOffset beginTime,
+                DateTimeOffset endTime,
                 bool ascending,
                 int limit )
                 : base( accountInfo, "events" )
@@ -55,14 +55,14 @@ namespace Typesafe.Mailgun.Events
             }
         }
 
-        public DateTime BeginTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTimeOffset BeginTime { get; set; }
+        public DateTimeOffset EndTime { get; set; }
         public bool Ascending { get; set; }
         public int Limit { get; set; }
 
-        private static string ToUnixTime( DateTime dateTime )
+        private static string ToUnixTime(DateTimeOffset dateTime)
         {
-            var unixTimestamp = dateTime.Ticks - Epoch.Ticks;
+            double unixTimestamp = dateTime.Ticks - Epoch.Ticks;
             unixTimestamp /= TimeSpan.TicksPerSecond;
             return unixTimestamp.ToString();
         }
