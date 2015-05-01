@@ -191,7 +191,7 @@ namespace Typesafe.Mailgun.Events
         public string Message { get; set; }
 
         [JsonProperty( "code" )]
-        public int Code { get; set; }
+        public string Code { get; set; }
 
         [JsonProperty( "description" )]
         public string Description { get; set; }
