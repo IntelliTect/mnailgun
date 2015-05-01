@@ -20,6 +20,8 @@ namespace Typesafe.Mailgun
 		/// <returns></returns>
 		SendMailCommandResult SendMail(MailMessage mailMessage);
 
+	    SendMailCommandResult SendMail( MailMessage mailMessage, List<string> tags );
+
 		IEnumerable<Route> GetRoutes(int skip, int take, out int count);
 
 		Route CreateRoute(int priority, string description, RouteFilter expression, params RouteAction[] actions);
