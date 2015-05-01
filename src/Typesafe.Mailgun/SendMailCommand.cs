@@ -18,7 +18,7 @@ namespace Typesafe.Mailgun
             this.mailMessage = mailMessage;
         }
 
-        public SendMailCommand(IMailgunAccountInfo accountInfo, MailMessage mailMessage, List<string> tags )
+        public SendMailCommand(IMailgunAccountInfo accountInfo, MailMessage mailMessage, IList<string> tags )
             : base(accountInfo, "messages")
         {
             if ( tags == null )

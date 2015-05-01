@@ -20,7 +20,7 @@ namespace Typesafe.Mailgun
 		/// <returns></returns>
 		SendMailCommandResult SendMail(MailMessage mailMessage);
 
-	    SendMailCommandResult SendMail( MailMessage mailMessage, List<string> tags );
+	    SendMailCommandResult SendMail( MailMessage mailMessage, IList<string> tags );
 
 		IEnumerable<Route> GetRoutes(int skip, int take, out int count);
 
