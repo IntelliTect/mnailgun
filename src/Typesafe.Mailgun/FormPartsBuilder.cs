@@ -12,10 +12,10 @@ namespace Typesafe.Mailgun
 	{
 		public static List<FormPart> Build(MailMessage message)
 		{
-			return Build(message, null);
+			return Build(message, null, null);
 		}
 
-		public static List<FormPart> Build(MailMessage message, IDictionary<string, IDictionary<string, object>> recipientVariables)
+		public static List<FormPart> Build(MailMessage message, IDictionary<string, IDictionary<string, object>> recipientVariables, IList<string> tags )
 		{
 			if (message == null)
 				return new List<FormPart>();
@@ -45,7 +45,15 @@ namespace Typesafe.Mailgun
 
 			result.AddRange(message.Attachments.Select(attachment => new AttachmentFormPart(attachment)));
 
-			return result;
+		    if ( tags != null )
+		    {
+		        foreach ( string tag in tags )
+		        {
+		            result.Add( new SimpleFormPart( "o:tag", tag ) );
+		        }
+		    }
+
+		    return result;
 		}
 
 		private static IEnumerable<FormPart> GetBodyParts(this MailMessage message)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -9,11 +10,30 @@ namespace Typesafe.Mailgun
     {
         private readonly MailMessage mailMessage;
 		private readonly IDictionary<string, IDictionary<string, object>> _recipientVariables;
-
+        private readonly List<string> mailgunTags;
+ 
         public SendMailCommand(IMailgunAccountInfo accountInfo, MailMessage mailMessage)
             : base(accountInfo, "messages")
         {
             this.mailMessage = mailMessage;
+        }
+
+        public SendMailCommand(IMailgunAccountInfo accountInfo, MailMessage mailMessage, List<string> tags )
+            : base(accountInfo, "messages")
+        {
+            if ( tags == null )
+            {
+                this.mailMessage = mailMessage;
+            }
+            else
+            {
+                if ( tags.Count > 3 )
+                {
+                    throw new ArgumentException( "Mailgun only supports 3 tags per message" );
+                }
+                this.mailMessage = mailMessage;
+                mailgunTags = new List<string>( tags );
+            }
         }
 
 		public SendMailCommand(IMailgunAccountInfo accountInfo, MailMessage mailMessage, IDictionary<string, IDictionary<string, object>> recipientVariables)
@@ -25,7 +45,7 @@ namespace Typesafe.Mailgun
 
         protected internal override IEnumerable<FormPart> CreateFormParts()
         {
-			return FormPartsBuilder.Build(mailMessage, _recipientVariables);
+			return FormPartsBuilder.Build(mailMessage, _recipientVariables, mailgunTags);
         }
 
 	    public override SendMailCommandResult TranslateResponse(MailgunHttpResponse response)

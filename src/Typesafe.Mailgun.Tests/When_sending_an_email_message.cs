@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Collections.Generic;
+using System.Net.Mail;
 using NUnit.Framework;
 
 namespace Typesafe.Mailgun.Tests
@@ -10,7 +11,7 @@ namespace Typesafe.Mailgun.Tests
 
 		public When_sending_an_email_message()
 		{
-			result = MailgunClientBuilder.GetClient().SendMail(new MailMessage("gino@samples.mailgun.org", "gino.heyman@gmail.com") { Body = "this is a test message from mailgun.", Subject = "Hello from mailgun" });
+			result = MailgunClientBuilder.GetClient().SendMail(new MailMessage("gino@samples.mailgun.org", "gino.heyman@gmail.com") { Body = "this is a test message from mailgun.", Subject = "Hello from mailgun" }, new List<string>{"Test Tag"});
 		}
 
 		[Test]

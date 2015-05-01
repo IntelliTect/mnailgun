@@ -26,6 +26,11 @@ namespace Typesafe.Mailgun
 
 		public string ApiKey { get; private set; }
 
+        public SendMailCommandResult SendMail(MailMessage mailMessage, List<string> tags )
+        {
+            return new SendMailCommand(this, mailMessage, tags).Invoke();
+        }
+
 		public SendMailCommandResult SendMail(MailMessage mailMessage)
 		{
 			return new SendMailCommand(this, mailMessage).Invoke();
